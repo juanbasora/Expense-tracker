@@ -1,24 +1,3 @@
-# Create a Date Picker Calendar
-# https://www.geeksforgeeks.org/create-a-date-picker-calendar-tkinter/
-
-
-
-# DB should have a re-occuring charge section
-# yes, or no
-# re-occuring charges will be auto added every month.
-
-
-# Search functions
-# Can search by date, price (above or below), or category.
-
-# Charts
-# Pie chart of the month (compares categories)
-# Graph comparing months.
-
-#### Extras ####
-# file menu (import csv from bank)
-# Payment reminders
-
 from tkinter import *
 from tkinter.ttk import *
 from backend import Database
