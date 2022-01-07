@@ -16,7 +16,6 @@ class expense_tracker:
         self.Gui.pack()
 
         # Variables
-        #self.amount = StringVar()
         self.drop_choice = StringVar()
         self.notes = StringVar()
 
