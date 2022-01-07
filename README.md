@@ -1,6 +1,3 @@
-# test
-
-Work in progress.
-
-
 # Expense-tracker
+
+Work in progress
