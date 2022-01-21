@@ -32,11 +32,6 @@ class Database:
 		rows = self.cur.fetchall()
 		return rows
 
-	# def search(self, title=""):
-	# 	self.cur.execute("SELECT * FROM expenses WHERE title=? OR author=? OR year=? OR isbn=?", (date, amount, category, notes))
-	# 	rows = self.cur.fetchall()
-	# 	return rows
-
 	def delete(self, id):
 		self.cur.execute("DELETE FROM expenses WHERE id=?", (id,))
 		self.conn.commit()
