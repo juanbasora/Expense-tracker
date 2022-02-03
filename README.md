@@ -5,4 +5,5 @@
 
 
 ## Description
- A python based expense tracker that uses libraries such as Tkinter, matplotlib, and saves the data in the backend with a SQL database. A dynamically changing pie chart that will update when an expense is added or removed.
+ A UI tool made with python tkinter that can save expense information such as category, date, amount, and optional notes into a SQL database. This information can
+then be viewed within a pie chart that will dynamically update when items are added or deleted.
