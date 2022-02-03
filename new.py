@@ -1,24 +1,3 @@
-# Create a Date Picker Calendar
-# https://www.geeksforgeeks.org/create-a-date-picker-calendar-tkinter/
-
-
-
-# DB should have a re-occuring charge section
-# yes, or no
-# re-occuring charges will be auto added every month.
-
-
-# Search functions
-# Can search by date, price (above or below), or category.
-
-# Charts
-# Pie chart of the month (compares categories)
-# Graph comparing months.
-
-#### Extras ####
-# file menu (import csv from bank)
-# Payment reminders
-
 from tkinter import *
 from tkinter.ttk import *
 from ttkwidgets import Table
@@ -210,18 +189,3 @@ if __name__ == "__main__":
     window = Tk()
     expense_tracker(window)
     window.mainloop()
-
-
-
-# different borders
-# https://stackoverflow.com/questions/39416021/border-for-tkinter-label/39416145
-
-###### TO DO #######
-
-# Add check box to display dollar value instead of percentage.
-
-# change databse so each months has its own db?
-# or only make it display charges for the month selected.
-
-
-# Edit pie chart when something is deleted.
