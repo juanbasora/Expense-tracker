@@ -82,11 +82,6 @@ class expense_tracker:
 
         self.fill_tables()
 
-    # View month
-        # for row in self.databse.view_all():
-        #     print(row[1].split('/')[0])
-
-        # If the databse is still emtpy, an empty pie chart will be displayed.
         if len(self.databse.view_all()) == 0:
             self.empty_pie_chart()
         else:
