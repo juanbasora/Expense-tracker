@@ -22,20 +22,10 @@ class Database:
 		last = self.cur.fetchone()
 		return last
 
-	def total_epxenses(self):
-		self.cur.execute("SELECT SUM(amount) FROM expenses")
-		total = self.cur.fetchone()
-		return total
-
 	def search_date(self, date):
 		self.cur.execute("SELECT * FROM expenses WHERE day=?", (date,))
 		rows = self.cur.fetchall()
 		return rows
-
-	# def search(self, title=""):
-	# 	self.cur.execute("SELECT * FROM expenses WHERE title=? OR author=? OR year=? OR isbn=?", (date, amount, category, notes))
-	# 	rows = self.cur.fetchall()
-	# 	return rows
 
 	def delete(self, id):
 		self.cur.execute("DELETE FROM expenses WHERE id=?", (id,))
