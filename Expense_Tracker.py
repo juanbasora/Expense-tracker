@@ -207,8 +207,4 @@ if __name__ == "__main__":
     window = Tk()
     expense_tracker(window)
     window.mainloop()
-
-
-
-# different borders
-# https://stackoverflow.com/questions/39416021/border-for-tkinter-label/39416145
+    
