@@ -181,7 +181,6 @@ class ExpenseTracker:
             messagebox.showinfo("Error", "Please choose a category")
 
     def add_to_db(self):
-        float(self.amount_entry.get())
         self.database.add_entry(self.cal.get_date(), self.amount_entry.get(), self.drop_choice.get(),
                                 self.notes_entry.get())
 
