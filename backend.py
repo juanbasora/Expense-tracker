@@ -20,10 +20,6 @@ class Database:
         self.cur.execute("SELECT * FROM expenses WHERE id=(SELECT max(id) FROM expenses)")
         return self.cur.fetchone()
 
-    def total_epxenses(self):
-        self.cur.execute("SELECT SUM(amount) FROM expenses")
-        return self.cur.fetchone()
-
     def search_date(self, date):
         self.cur.execute("SELECT * FROM expenses WHERE day=?", (date,))
         return self.cur.fetchall()
