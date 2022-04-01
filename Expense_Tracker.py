@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Tk, Frame, Canvas, Entry, Button, Checkbutton, OptionMenu, Scrollbar, StringVar, IntVar
 from tkinter.ttk import *
 from tkinter import messagebox
 from ttkwidgets import Table
@@ -7,19 +7,20 @@ from tkcalendar import Calendar
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-class expense_tracker:
+class ExpenseTracker:
 
-    def __init__(self, master):
+    def __init__(self):
         self.database = Database()
-        master.title("Expense Tracker")
-        self.master = Frame(master)
+        self.master = Tk()
+        self.master.title("Expense Tracker")
+        self.master = Frame(self.master)
         self.master.pack()
         self.Gui = Canvas(self.master, width=840, height=520, highlightthickness=0, bg='whitesmoke')
         self.Gui.pack()
 
         # Variables
         self.drop_choice = StringVar()
-        self.dic = {}
+        self.entries_dict = {}
 
         # Calendar
         self.cal = Calendar(self.Gui)
@@ -54,7 +55,8 @@ class expense_tracker:
 
         # Checkbox
         self.check_button = IntVar()
-        self.dollar_value = Checkbutton(self.Gui, text="Dollar Value", variable=self.check_button, onvalue=1, offvalue=0, command=self.get_pie_info)
+        self.dollar_value = Checkbutton(self.Gui, text="Dollar Value", variable=self.check_button, onvalue=1,
+                                        offvalue=0, command=self.get_pie_info)
         self.Gui.create_window(650, 280, window=self.dollar_value)
 
         # Table with its own frame so we can attach a scrollbar.
@@ -86,59 +88,58 @@ class expense_tracker:
         self.get_month()
 
     def get_pie_info(self):
-        self.dic.clear() # reset the dictionary to be emtpy
+        self.entries_dict.clear()  # reset the dictionary to be emtpy
+
         for items in self.Etable.get_children():
             row = self.Etable.item(items)
             category = row['values'][3]
             amount = row['values'][2]
-            if category in self.dic:
-                self.dic[category] += float(amount)
+            if category in self.entries_dict:
+                self.entries_dict[category] += float(amount)
             else:
-                self.dic[category] = float(amount)
+                self.entries_dict[category] = float(amount)
 
-        self.pie_chart_config(self.dic)
+        self.pie_chart_config(self.entries_dict)
 
     def edit_pie_chart(self, category, amount, deduct=False):
         if deduct:
-            if category in self.dic:
-                self.dic[category] -= float(amount)
-                if self.dic[category] == 0:
-                    self.dic.pop(category)
-                    if len(self.dic) == 0:
+            if category in self.entries_dict:
+                self.entries_dict[category] -= float(amount)
+                if self.entries_dict[category] == 0:
+                    self.entries_dict.pop(category)
+                    if len(self.entries_dict) == 0:
                         self.empty_pie_chart()
                     else:
-                        self.pie_chart_config(self.dic)
+                        self.pie_chart_config(self.entries_dict)
+        elif category in self.entries_dict:
+            self.entries_dict[category] += float(amount)
         else:
-            if category in self.dic:
-                self.dic[category] += float(amount)
-            else:
-                self.dic[category] = float(amount)
+            self.entries_dict[category] = float(amount)
 
-            self.pie_chart_config(self.dic)
+        self.pie_chart_config(self.entries_dict)
 
-    def pie_chart_config(self, dic):
+    def pie_chart_config(self, entries):
         label = []
         values = []
 
-        for item, amount in dic.items():
+        for item, amount in entries.items():
             label.append(item)
             values.append(amount)
 
         if self.check_button.get() == 1:
-            auto = lambda p:f'${p*sum(values)/100 :.2f}'
+            number_display = lambda p: f'${p * sum(values) / 100 :.2f}'
         else:
-            auto = '%1.0f%%'
+            number_display = '%1.0f%%'
 
-        fig = Figure(figsize=(3.4,2.5))
+        fig = Figure(figsize=(3.4, 2.5))
         fig.patch.set_facecolor('whitesmoke')
         ax = fig.add_subplot(111)
         # ax.clear()
-        ax.pie(values, radius=1.2, labels=label, autopct=auto, shadow=True)
+        ax.pie(values, radius=1.2, labels=label, autopct=number_display, shadow=True)
         self.add_pie_chart_to_window(fig, 660, 135, 'enabled')
 
     def empty_pie_chart(self):
-
-        fig = Figure(figsize=(3.4,2.5))
+        fig = Figure(figsize=(3.4, 2.5))
         fig.patch.set_facecolor('whitesmoke')
         ax = fig.add_subplot(111)
         ax.pie([100], radius=1.2, labels=['No data'], labeldistance=0, colors='green', shadow=False)
@@ -182,29 +183,30 @@ class expense_tracker:
 
     def add_to_db(self):
         float(self.amount_entry.get())
-        self.database.add_entry(self.cal.get_date(), self.amount_entry.get(), self.drop_choice.get(), self.notes_entry.get())
+        self.database.add_entry(self.cal.get_date(), self.amount_entry.get(), self.drop_choice.get(),
+                                self.notes_entry.get())
 
-        values = [self.database.last_edit()[0], self.cal.get_date(), self.amount_entry.get(), self.drop_choice.get(), self.notes_entry.get()]
+        values = [self.database.last_edit()[0], self.cal.get_date(), self.amount_entry.get(), self.drop_choice.get(),
+                  self.notes_entry.get()]
         self.Etable.insert('', 'end', values=values)
 
         self.edit_pie_chart(self.drop_choice.get(), self.amount_entry.get())
-        self.amount_entry.delete(0, END)
-        self.notes_entry.delete(0, END)
+        self.amount_entry.delete(0, 'end')
+        self.notes_entry.delete(0, 'end')
 
     def delete(self):
         # Getting the values from the selected item.
         for entrie in self.Etable.selection():
             row = self.Etable.item(entrie)
-        # Deleting from database using the ID.
+            # Deleting from database using the ID.
             self.database.delete(row['values'][0])
-        # Deletgin from table
+            # Deletgin from table
             self.Etable.delete(entrie)
-        # Delete from pie chart
+            # Delete from pie chart
             self.edit_pie_chart(row['values'][3], row['values'][2], True)
 
+    def start(self):
+        self.master.mainloop()
 
 if __name__ == "__main__":
-    window = Tk()
-    expense_tracker(window)
-    window.mainloop()
-    
+    ExpenseTracker().start()
