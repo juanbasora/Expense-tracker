@@ -134,7 +134,6 @@ class ExpenseTracker:
         fig = Figure(figsize=(3.4, 2.5))
         fig.patch.set_facecolor('whitesmoke')
         ax = fig.add_subplot(111)
-        # ax.clear()
         ax.pie(values, radius=1.2, labels=label, autopct=number_display, shadow=True)
         self.add_pie_chart_to_window(fig, 660, 135, 'enabled')
 
