@@ -1,7 +1,7 @@
 # Expense-tracker
 
 
-![Expense_tracker](https://user-images.githubusercontent.com/28414217/152267287-39f8eb12-edb8-4574-8151-f65a1272385e.JPG)
+![Expense_tracker](https://user-images.githubusercontent.com/28414217/163078890-7dd77855-2726-44ae-8b63-dfd055d0c441.JPG)
 
 
 ## Description
