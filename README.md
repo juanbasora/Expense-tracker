@@ -1,4 +1,6 @@
 # Expense-tracker
+![GitHub last commit](https://img.shields.io/github/last-commit/juanbasora/Expense-tracker)
+[![GitHub license](https://img.shields.io/github/license/juanbasora/Expense-tracker)](https://github.com/juanbasora/Expense-tracker)
 
 
 ![Expense_tracker](https://user-images.githubusercontent.com/28414217/163078890-7dd77855-2726-44ae-8b63-dfd055d0c441.JPG)
