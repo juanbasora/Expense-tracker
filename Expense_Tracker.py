@@ -1,11 +1,12 @@
-from tkinter import Tk, Frame, Canvas, Entry, Button, Checkbutton, OptionMenu, Scrollbar, StringVar, IntVar
-from tkinter.ttk import *
+from tkinter.ttk import Entry, Button, Checkbutton, OptionMenu, Scrollbar
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from tkinter import Tk, Frame, Canvas, StringVar, IntVar
+from matplotlib.figure import Figure
+from tkcalendar import Calendar
 from tkinter import messagebox
 from ttkwidgets import Table
 from backend import Database
-from tkcalendar import Calendar
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
+
 
 class ExpenseTracker:
 
@@ -181,6 +182,7 @@ class ExpenseTracker:
             messagebox.showinfo("Error", "Please choose a category")
 
     def add_to_db(self):
+        # float(self.amount_entry.get())
         self.database.add_entry(self.cal.get_date(), self.amount_entry.get(), self.drop_choice.get(),
                                 self.notes_entry.get())
 
@@ -205,6 +207,7 @@ class ExpenseTracker:
 
     def start(self):
         self.master.mainloop()
+
 
 if __name__ == "__main__":
     ExpenseTracker().start()
