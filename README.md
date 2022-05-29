@@ -13,10 +13,7 @@ then be viewed within a pie chart that will dynamically update when items are ad
 ## How to use
 ```
 git clone https://github.com/juanbasora/Expense-tracker
-
 cd Expense-tracker
-
 pip install -r requirements.txt
-
 python3 Expense_Tracker.py
 ```
